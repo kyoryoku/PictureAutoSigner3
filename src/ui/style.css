@@ -1,0 +1,30 @@
+.button{
+    -fx-border-color: #299fff;
+    -fx-border-radius: 5
+}
+
+.button-alert {
+     -fx-border-color: #e64530;
+     -fx-border-radius: 5
+}
+
+.listView {
+    -fx-border-color: #299fff;
+    -fx-border-radius: 5;
+}
+
+.listView .list-cell {
+    -fx-pref-height: 45;
+}
+
+.listView .list-cell:focused {
+    -fx-background-color: #3c96cf;
+}
+
+.jfx-toggle-button {
+     -jfx-toggle-color: #069122;
+     -jfx-toggle-line-color: #538c5e;
+     -jfx-untoggle-color: #f22727;
+     -jfx-untoggle-line-color: #ed6d6d;
+
+}

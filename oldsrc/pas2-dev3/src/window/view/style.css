@@ -1,0 +1,17 @@
+.check-box {
+    /* default properties */
+    box-color: #0675ba;
+}
+
+.check-box > .box{
+    -fx-padding: 5px;
+}
+
+.check-box:selected > .box{
+    -fx-background-color: box-color;
+}
+
+.check-box:selected > .box > .mark{
+    -fx-background-color: box-color;
+}
+
