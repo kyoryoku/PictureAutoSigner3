@@ -7,8 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.commandViewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="main-anchor-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.commandViewController">
    <children>
       <JFXComboBox fx:id="cmdType" labelFloat="true" layoutX="32.0" layoutY="90.0" prefHeight="29.0" prefWidth="307.0" promptText="Тип команды" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0" />
       <JFXTextField fx:id="cmdName" focusColor="#1100ff" labelFloat="true" layoutX="32.0" layoutY="33.0" promptText="Имя команды" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0" />

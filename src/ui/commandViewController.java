@@ -58,6 +58,9 @@ public class commandViewController implements Windowed {
         cmdStr2.textProperty().bindBidirectional(
                 DataModel.getDataModel().getChosenCommand().str2Property()
         );
+
+
+
     }
 
     private void changeContent(CommandType newType){

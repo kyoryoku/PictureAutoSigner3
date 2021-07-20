@@ -15,6 +15,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.Command;
 import model.DataModel;
 import org.kordamp.ikonli.javafx.FontIcon;
@@ -77,8 +78,8 @@ public class mainViewController implements Windowed {
     //настройка кнпопок
     private void initializeButtons(){
         int iconSize = 20;
-        Color iconColor = Color.web("#0675ba");
-        Color iconColorAlert = Color.web("#ba2106");
+        Color iconColor = Color.web("#EEEEEE");
+        Color iconColorAlert = Color.web("#ff1128");
 
         //Кнопка Добавить
         FontIcon addIcon = new FontIcon("anto-plus");
@@ -147,7 +148,7 @@ public class mainViewController implements Windowed {
                         JFXButton btnKeyAssign = new JFXButton();
                         iconKeyAssign.setIconLiteral("anto-gold");
                         iconKeyAssign.setIconSize(20);
-                        iconKeyAssign.setIconColor(Color.web("#0675ba"));
+                        iconKeyAssign.setIconColor(Color.web("#EEEEEE"));
                         btnKeyAssign.setGraphic(iconKeyAssign);
                         AnchorPane.setRightAnchor(btnKeyAssign, -2.);
                         AnchorPane.setTopAnchor(btnKeyAssign, 5.);

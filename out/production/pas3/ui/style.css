@@ -1,30 +1,106 @@
-.button{
-    -fx-border-color: #299fff;
-    -fx-border-radius: 5
+* {
+    color-background: #0e1621;
+    color-background2: #17212b;
+    color-foreground: #2b5278;
+    color-foreground2: #2e70a5;
+    color-alert: #BE6E3A;
+    color-alert2: #FD7013;
+    color-text: #6c7883;
+    color-text2: #EEEEEE;
+    color-warning: #c30013;
+    color-warning2: #ff1128;
+    color-normal: #058014;
+    color-normal2: #0FC425;
+
+
 }
 
-.button-alert {
-     -fx-border-color: #e64530;
-     -fx-border-radius: 5
+.main-anchor-pane {
+    -fx-background-color: color-background;
 }
 
-.listView {
-    -fx-border-color: #299fff;
-    -fx-border-radius: 5;
+.list-view {
+    -fx-background-color: color-background;
+}
+
+.list-view .scroll-bar {
+    -fx-background-color: color-background;
+    -fx-pref-width: 8;
+}
+
+.list-view .scroll-bar .thumb {
+    -fx-background-color: color-text;
+
+}
+
+.list-view .scroll-bar .decrement-button:hover {
+    -fx-background-color: color-background;
+}
+
+.list-view .scroll-bar .increment-button:hover {
+    -fx-background-color: color-background;
 }
 
 .listView .list-cell {
     -fx-pref-height: 45;
+    -fx-background-color: color-background;
 }
 
 .listView .list-cell:focused {
-    -fx-background-color: #3c96cf;
+    -fx-background-color: color-foreground;
+}
+
+.label {
+    -fx-text-fill: color-text2;
+}
+
+.jfx-button {
+    -fx-text-fill: color-text2;
+    -fx-border-color: color-text;
+    -fx-border-radius: 5;
+    -fx-background-color: color-background2;
+}
+
+.alert {
+    -fx-border-color: color-warning2;
 }
 
 .jfx-toggle-button {
-     -jfx-toggle-color: #069122;
-     -jfx-toggle-line-color: #538c5e;
-     -jfx-untoggle-color: #f22727;
-     -jfx-untoggle-line-color: #ed6d6d;
+     -jfx-toggle-color: color-normal2;
+     -jfx-toggle-line-color: color-text;
+     -jfx-untoggle-color: color-warning;
+     -jfx-untoggle-line-color: color-text;
 
+}
+
+.jfx-text-field {
+    -jfx-focus-color: color-alert2;
+    -jfx-unfocus-color: color-text;
+    -fx-text-fill: color-text2;
+}
+
+.jfx-combo-box {
+    -jfx-focus-color: color-alert2;
+    -jfx-unfocus-color: color-text;
+    -fx-text-fill: color-text2;
+    -fx-background-color: color-background;
+}
+
+
+.jfx-combo-box .list-cell {
+    -fx-text-fill: color-text2;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: color-background2;
+}
+
+.jfx-combo-box .list-cell:hover  {
+    -fx-background-color: color-foreground;
+}
+
+.jfx-text-area {
+    -jfx-focus-color: color-alert2;
+    -jfx-unfocus-color: color-text;
+    -fx-text-fill: color-text2;
 }
