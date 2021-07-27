@@ -5,28 +5,20 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXToggleButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import model.Command;
 import model.DataModel;
 import org.kordamp.ikonli.javafx.FontIcon;
-import ui.windows.WindowType;
-import ui.windows.Windows;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class mainViewController implements Windowed {
+public class mainController {
 
     @FXML private ResourceBundle resources;
     @FXML private URL location;
@@ -55,18 +47,18 @@ public class mainViewController implements Windowed {
 
     //обработчик нажатия на кнопку Профиль
     @FXML void handleBtnProfile(ActionEvent event) {
-        Windows.getInstance().openWindow(WindowType.PROFILE);
+        WindowsManager.getInstance().openProfileWindow();
     }
 
     //обработчик нажатия на кнопку Помощь
     @FXML void handleBtnHelp(ActionEvent event) {
-        Windows.getInstance().openWindow(WindowType.HELP);
+        WindowsManager.getInstance().openHelpWindow();
     }
 
     //обработчик кликов по листвью
     @FXML void handleLv(MouseEvent event) {
         if (event.getClickCount() == 2 && lv.getSelectionModel().getSelectedItem() != null) {
-            Windows.getInstance().openWindow(WindowType.COMMAND);
+            WindowsManager.getInstance().openCommandWindow();
         }
     }
 
@@ -153,7 +145,8 @@ public class mainViewController implements Windowed {
                         AnchorPane.setRightAnchor(btnKeyAssign, -2.);
                         AnchorPane.setTopAnchor(btnKeyAssign, 5.);
                         btnKeyAssign.setOnAction(event -> {
-
+                            DataModel.getDataModel().setChosenCommand(item);
+                            WindowsManager.getInstance().openAssignKeyWindow();
                         });
 
                         AnchorPane root = new AnchorPane(btnActivate, lblCmdName, lblAssignedKey, btnKeyAssign);
@@ -169,28 +162,5 @@ public class mainViewController implements Windowed {
                 DataModel.getDataModel().setChosenCommand(newSelection);
             }
         });
-    }
-
-    private Stage stage;
-    @Override
-    public void show() {
-        Parent root = null;
-        try {
-            root = FXMLLoader.load(getClass().getResource("mainView.fxml"));
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
-        stage = new Stage();
-        stage.setTitle("Picture Auto Signer 3");
-        stage.setScene(new Scene(root, 600, 400));
-        stage.show();
-        stage.setOnCloseRequest(e -> {
-            Windows.getInstance().closeWindow(WindowType.MAIN);
-        });
-    }
-
-    @Override
-    public void close() {
-        stage.close();
     }
 }

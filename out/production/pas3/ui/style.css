@@ -10,9 +10,7 @@
     color-warning: #c30013;
     color-warning2: #ff1128;
     color-normal: #058014;
-    color-normal2: #0FC425;
-
-
+    color-normal2: #0dba19;
 }
 
 .main-anchor-pane {
@@ -59,6 +57,11 @@
     -fx-border-color: color-text;
     -fx-border-radius: 5;
     -fx-background-color: color-background2;
+    -jfx-disable-visual-focus: true;
+}
+
+.jfx-button:focused {
+    -fx-border-color: color-alert2;
 }
 
 .alert {
@@ -99,8 +102,15 @@
     -fx-background-color: color-foreground;
 }
 
+
 .jfx-text-area {
     -jfx-focus-color: color-alert2;
     -jfx-unfocus-color: color-text;
+    -fx-text-fill: color-text2;
+}
+
+.jfx-dialog-layout {
+    -fx-background-color: color-background2;
+    -fx-border-color: color-alert2;
     -fx-text-fill: color-text2;
 }

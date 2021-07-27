@@ -40,8 +40,6 @@ public class Hotkey implements HotkeyEventPublisher, NativeKeyListener {
     @Override
     public void addListener(KeyListener listener) {
         this.subscribers.add(listener);
-
-        System.out.println("Добавлено подписчиков: " + subscribers.size());
     }
 
     public void addListeners(KeyListener... listeners) {

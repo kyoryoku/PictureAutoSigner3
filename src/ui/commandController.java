@@ -1,29 +1,24 @@
 package ui;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
-import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import model.CommandType;
 import model.DataModel;
-import ui.windows.WindowType;
-import ui.windows.Windows;
+import org.w3c.dom.ls.LSOutput;
 
-import javax.xml.crypto.Data;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class commandViewController implements Windowed {
+public class commandController {
 
     @FXML private ResourceBundle resources;
     @FXML private URL location;
@@ -33,6 +28,14 @@ public class commandViewController implements Windowed {
     @FXML private JFXTextArea cmdStr1;
     @FXML private JFXTextArea cmdStr2;
     @FXML private Label lblMessage;
+    @FXML private StackPane pane;
+
+    JFXDialog searchDialog;
+    JFXDialogLayout searchDialogContent;
+//    JFXComboBox<String> searchDialogContentBody;
+    JFXTextField searchDialogContentBody;
+
+
 
     @FXML void initialize() {
 
@@ -48,6 +51,7 @@ public class commandViewController implements Windowed {
                 changeContent(newValue);
             }
         });
+
         lblMessage.setText("Выберите тип команды!");
         changeContent(DataModel.getDataModel().getChosenCommand().getType());
 
@@ -61,8 +65,32 @@ public class commandViewController implements Windowed {
 
 
 
+//        searchDialogContentBody = new JFXComboBox<String>();
+        searchDialogContentBody = new JFXTextField();
+        searchDialogContentBody.setPromptText("Введите текст для поиска");
+        searchDialogContentBody.setLabelFloat(true);
+        searchDialogContentBody.setEditable(true);
+        ArrayList<String> list = new ArrayList<String>();
+        list.add("1111");
+        list.add("2222");
+        list.add("3333");
+        list.add("4444");
+        list.add("5555");
+//        searchDialogContentBody.getItems().setAll(list);
+
+        searchDialogContent = new JFXDialogLayout( );
+        searchDialogContent.setBody(searchDialogContentBody);
+        searchDialog = new JFXDialog(pane, searchDialogContent, JFXDialog.DialogTransition.NONE);
     }
 
+    //этот метод нужен для передачи фокуса на поле сразу после отображения окна
+    //вызывается в виндовсменеджере
+    public void afterShow(){
+        cmdName.requestFocus();
+
+    }
+
+    //метод обновляет контент в зависимости от типа команды
     private void changeContent(CommandType newType){
         switch (newType){
             case NOT_SET -> {
@@ -85,32 +113,18 @@ public class commandViewController implements Windowed {
                 cmdStr2.setVisible(true);
             }
         }
-
     }
 
-
-
-    Stage stage;
-    @Override
-    public void show() {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("commandView.fxml"));
-            stage = new Stage();
-            stage.setTitle("COMMAND VIEW");
-            stage.setScene(new Scene(root, 600, 400));
-
-            stage.setOnCloseRequest(e -> {
-                Windows.getInstance().closeWindow(WindowType.COMMAND);
-            });
-
-            stage.show();
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
+    @FXML private void handleKeyRelease(KeyEvent event){
+        if (event.isControlDown()){
+            if (event.getCode() == KeyCode.F){
+                openSearchDialog();
+                searchDialogContentBody.requestFocus();
+            }
         }
     }
 
-    @Override
-    public void close() {
-        stage.close();
+    private void openSearchDialog(){
+        searchDialog.show();
     }
 }

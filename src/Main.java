@@ -1,14 +1,14 @@
+import hotkeys.Hotkey;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import ui.windows.WindowType;
-import ui.windows.Windows;
+import ui.WindowsManager;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
-        Windows.getInstance().openWindow(WindowType.MAIN);
+        WindowsManager.getInstance().openMainWindow();
+        Hotkey.getInstance().enableHotkeys();
     }
 
 
