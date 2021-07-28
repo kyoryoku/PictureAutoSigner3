@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="main-anchor-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.commandController">
+   <children>
+      <JFXComboBox fx:id="cmdType" labelFloat="true" prefHeight="29.0" prefWidth="307.0" promptText="Тип команды" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0" />
+      <JFXTextField fx:id="cmdName" focusColor="#1100ff" labelFloat="true" promptText="Имя команды" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0" />
+      <AnchorPane prefHeight="279.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
+         <children>
+            <JFXTextArea fx:id="cmdStr1" labelFloat="true" layoutX="35.0" layoutY="49.0" prefWidth="580.0" promptText="STR1" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXTextArea>
+            <JFXTextArea fx:id="cmdStr2" labelFloat="true" layoutX="35.0" layoutY="124.0" prefHeight="120.0" prefWidth="590.0" promptText="STR2" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXTextArea>
+            <Label fx:id="lblMessage" layoutX="10.0" layoutY="14.0" text="Label" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="searchAnchorPane" prefHeight="90.0" prefWidth="400.0" style="-fx-border-color: color-alert2; -fx-background-color: color-background;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="150.0">
+         <children>
+            <JFXComboBox fx:id="comboBox" editable="true" labelFloat="true" promptText="Строка для поиска" visibleRowCount="0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </AnchorPane>
+   </children>
+</AnchorPane>

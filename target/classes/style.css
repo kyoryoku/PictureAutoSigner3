@@ -1,0 +1,127 @@
+* {
+    color-background: #0e1621;
+    color-background2: #17212b;
+    color-foreground: #2b5278;
+    color-foreground2: #2e70a5;
+    color-alert: #BE6E3A;
+    color-alert2: #FD7013;
+    color-text: #6c7883;
+    color-text2: #EEEEEE;
+    color-warning: #c30013;
+    color-warning2: #ff1128;
+    color-normal: #058014;
+    color-normal2: #0dba19;
+}
+
+.main-anchor-pane {
+    -fx-background-color: color-background;
+}
+
+.list-view {
+    -fx-background-color: color-background;
+}
+
+.list-view .scroll-bar {
+    -fx-background-color: color-background;
+    -fx-pref-width: 8;
+}
+
+.list-view .scroll-bar .thumb {
+    -fx-background-color: color-text;
+
+}
+
+.list-view .scroll-bar .decrement-button:hover {
+    -fx-background-color: color-background;
+}
+
+.list-view .scroll-bar .increment-button:hover {
+    -fx-background-color: color-background;
+}
+
+.listView .list-cell {
+    -fx-pref-height: 45;
+    -fx-background-color: color-background;
+}
+
+.listView .list-cell:focused {
+    -fx-background-color: color-foreground;
+}
+
+.label {
+    -fx-text-fill: color-text2;
+}
+
+.jfx-button {
+    -fx-text-fill: color-text2;
+    -fx-border-color: color-text;
+    -fx-border-radius: 5;
+    -fx-background-color: color-background2;
+    -jfx-disable-visual-focus: true;
+}
+
+.jfx-button:focused {
+    -fx-border-color: color-alert2;
+}
+
+.alert {
+    -fx-border-color: color-warning2;
+}
+
+.jfx-toggle-button {
+     -jfx-toggle-color: color-normal2;
+     -jfx-toggle-line-color: color-text;
+     -jfx-untoggle-color: color-warning;
+     -jfx-untoggle-line-color: color-text;
+
+}
+
+.jfx-text-field {
+    -jfx-focus-color: color-alert2;
+    -jfx-unfocus-color: color-text;
+    -fx-text-fill: color-text2;
+}
+
+.jfx-combo-box {
+    -jfx-focus-color: color-alert2;
+    -jfx-unfocus-color: color-text;
+    -fx-text-fill: color-text2;
+    -fx-background-color: color-background;
+}
+
+
+.jfx-combo-box .list-cell {
+    -fx-text-fill: color-text2;
+}
+
+.combo-box-popup .list-cell {
+    -fx-background-color: color-background2;
+}
+
+.jfx-combo-box .list-cell:selected  {
+    -fx-background-color: color-foreground;
+}
+
+
+.jfx-text-area {
+    -jfx-focus-color: color-alert2;
+    -jfx-unfocus-color: color-text;
+    -fx-text-fill: color-text2;
+}
+
+.jfx-dialog-layout {
+    -fx-background-color: color-background2;
+    -fx-border-color: color-alert2;
+    -fx-text-fill: color-text2;
+}
+
+.jfx-combo-box:editable .text-field {
+    -fx-text-fill: color-text2;
+}
+
+.jfx-combo-box:editable .arrow-button .arrow {
+        -fx-shape: "M18.125,15.804l-4.038-4.037c0.675-1.079,1.012-2.308,1.01-3.534C15.089,4.62,12.199,1.75,8.584,1.75C4.815,1.75,1.982,4.726,2,8.286c0.021,3.577,2.908,6.549,6.578,6.549c1.241,0,2.417-0.347,3.44-0.985l4.032,4.026c0.167,0.166,0.43,0.166,0.596,0l1.479-1.478C18.292,16.234,18.292,15.968,18.125,15.804 M8.578,13.99c-3.198,0-5.716-2.593-5.733-5.71c-0.017-3.084,2.438-5.686,5.74-5.686c3.197,0,5.625,2.493,5.64,5.624C14.242,11.548,11.621,13.99,8.578,13.99 M16.349,16.981l-3.637-3.635c0.131-0.11,0.721-0.695,0.876-0.884l3.642,3.639L16.349,16.981z";
+        -fx-padding: 8 8 8 8;
+        -fx-background-color: color-text2;
+}
+
