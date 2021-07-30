@@ -28,6 +28,9 @@ public class Profile {
      * */
     public void loadProfile() throws LoadProfileException {
 
+        //очищаем список команд перед загрузкой профиля из файла
+        DataModel.getDataModel().clear();
+
         KMLParser kmlParser = new KMLParser();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(profilePath.get()))) {
 

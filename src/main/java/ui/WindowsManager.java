@@ -65,7 +65,7 @@ public class WindowsManager {
                 loader.setLocation(getClass().getResource("/commandView.fxml"));
                 loader.load();
                 Parent root = loader.getRoot();
-                commandController cc = loader.getController();
+                CommandController cc = loader.getController();
                 commandViewStage = new Stage();
                 commandViewStage.setTitle("Настройка команды");
                 commandViewStage.setScene(new Scene(root, 600, 400));

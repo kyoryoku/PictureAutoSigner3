@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="main-anchor-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.commandController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="main-anchor-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.CommandController">
    <children>
       <JFXComboBox fx:id="cmdType" labelFloat="true" prefHeight="29.0" prefWidth="307.0" promptText="Тип команды" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="70.0" />
       <JFXTextField fx:id="cmdName" focusColor="#1100ff" labelFloat="true" promptText="Имя команды" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0" />
@@ -29,7 +29,7 @@
       </AnchorPane>
       <AnchorPane fx:id="searchAnchorPane" prefHeight="90.0" prefWidth="400.0" style="-fx-border-color: color-alert2; -fx-background-color: color-background;" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="150.0">
          <children>
-            <JFXComboBox fx:id="comboBox" editable="true" labelFloat="true" promptText="Строка для поиска" visibleRowCount="0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0" />
+            <JFXComboBox fx:id="searchComboBox" editable="true" labelFloat="true" promptText="Строка для поиска" visibleRowCount="0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0" />
          </children>
          <opaqueInsets>
             <Insets />

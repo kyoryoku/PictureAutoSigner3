@@ -15,7 +15,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class assignKeyController implements KeyListener {
+public class AssignKeyController implements KeyListener {
     @FXML
     private ResourceBundle resources;
     @FXML private URL location;

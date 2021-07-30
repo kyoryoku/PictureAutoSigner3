@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
+import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -18,7 +19,7 @@ import org.kordamp.ikonli.javafx.FontIcon;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class mainController {
+public class MainController {
 
     @FXML private ResourceBundle resources;
     @FXML private URL location;
@@ -28,6 +29,11 @@ public class mainController {
     @FXML private JFXButton btnRemove;
     @FXML private JFXButton btnProfile;
     @FXML private JFXButton btnHelp;
+    @FXML private JFXButton btnSave;
+    @FXML private JFXButton btnLoad;
+
+
+
 
     //обработчик нажатия на кнопку Добавить
     @FXML void handleBtnAdd(ActionEvent event) {
@@ -63,6 +69,8 @@ public class mainController {
     }
 
     @FXML void initialize() {
+
+
         initializeButtons();
         initializeListView();
     }
@@ -92,10 +100,23 @@ public class mainController {
         btnProfile.setGraphic(profileIcon);
 
         //Кнопка Помощь
-        FontIcon helpIcon = new FontIcon("anto-info-circle");
+        FontIcon helpIcon = new FontIcon("anto-question-circle");
         helpIcon.setIconSize(iconSize);
         helpIcon.setIconColor(iconColor);
         btnHelp.setGraphic(helpIcon);
+
+        //Кнопка Save
+        FontIcon iconSave = new FontIcon("anto-export");
+        iconSave.setIconSize(iconSize);
+        iconSave.setIconColor(iconColor);
+        btnSave.setGraphic(iconSave);
+
+        //Кнопка Load
+        FontIcon iconLoad = new FontIcon("anto-import");
+        iconLoad.setIconSize(iconSize);
+        iconLoad.setIconColor(iconColor);
+        btnLoad.setGraphic(iconLoad);
+
     }
 
     //Настройка ListView

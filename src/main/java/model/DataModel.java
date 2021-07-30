@@ -1,9 +1,14 @@
 package model;
 
+import hotkeys.Key;
+import hotkeys.Keys;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class DataModel {
 
@@ -55,5 +60,25 @@ public class DataModel {
 
     public Profile getProfile() {
         return profile;
+    }
+
+    public ArrayList<String> getNumeratorsAndKeysList(){
+        ArrayList<String> items = new ArrayList<>();
+        for (Key k : Keys.getKeyList()){
+            items.add("#{" + k.getLongName() + "}");
+        }
+
+        //Добавить нумераторы в список
+
+        Collections.sort(items);
+        items.add(0, "${}");
+        items.add(0, "#{}");
+
+        return items;
+    }
+
+    public void clear(){
+        commands.clear();
+        chosenCommand.set(null);
     }
 }
