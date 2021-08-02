@@ -37,7 +37,7 @@ public class Executor {
                 text = text.substring(matcher.end());
                 matcher = pattern.matcher(text);
             } else if (matcher.group().startsWith("${")) {
-                text = text.replace(matcher.group(), numerate(matcher.group()));
+                text = text.replaceFirst(Pattern.quote(matcher.group()), numerate(matcher.group()));
                 matcher = pattern.matcher(text);
             }
         }
@@ -47,6 +47,7 @@ public class Executor {
         }
 
     }
+
 
     private static void paste (String text){
         if (text.length() != 0) {
@@ -62,11 +63,12 @@ public class Executor {
     }
 
     private static void press (String key){
+        int threadSleep = 10;
         try {
-            Thread.sleep(200);
+            Thread.sleep(threadSleep);
             robot.keyPress(Keys.getKeyFromLongName(key).getCode());
             robot.keyRelease(Keys.getKeyFromLongName(key).getCode());
-            Thread.sleep(200);
+            Thread.sleep(threadSleep);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -74,7 +76,7 @@ public class Executor {
     }
 
     private static String numerate (String numeratorString){
-        //отсекаем $, { и }
+        //отсекаем ${ и }
         numeratorString = numeratorString.substring(2, numeratorString.length() - 1);
 
         String name = "";
@@ -126,7 +128,7 @@ public class Executor {
         }
 
         //нажать бекспейс столько раз, сколько символов в строке str1
-        for (int i = 0; i < str1.length(); i++) {
+        for (int i = 0; i < str1.length() + 1; i++) {
             press("VK_BACK_SPACE");
         }
 

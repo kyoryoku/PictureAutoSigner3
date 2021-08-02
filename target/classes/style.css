@@ -98,8 +98,8 @@
     -fx-background-color: color-background2;
 }
 
-.jfx-combo-box .list-cell:selected  {
-    -fx-background-color: color-foreground;
+.jfx-combo-box > .list-cell:selected  {
+    -fx-background-color: color-background;
 }
 
 

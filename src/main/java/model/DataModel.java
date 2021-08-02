@@ -13,6 +13,7 @@ import java.util.Collections;
 public class DataModel {
 
     private final ObservableList<Command> commands = FXCollections.observableArrayList();
+    private final ObservableList<Command> pausedCommands = FXCollections.observableArrayList();
     private final ObjectProperty<Command> chosenCommand = new SimpleObjectProperty<>(null);
     private final Profile profile;
 
@@ -80,5 +81,36 @@ public class DataModel {
     public void clear(){
         commands.clear();
         chosenCommand.set(null);
+    }
+
+    public void disableAll(){
+        for(Command cmd : commands){
+            cmd.setActive(false);
+        }
+    }
+
+    public void enableAll(){
+        for(Command cmd : commands){
+            cmd.setActive(true);
+        }
+    }
+
+    public void pause(){
+        pausedCommands.clear();
+        for(Command cmd : commands){
+
+            if (cmd.isActive()){
+                pausedCommands.add(cmd);
+                cmd.setActive(false);
+            }
+        }
+    }
+
+
+    public void unpause(){
+        for(Command cmd : pausedCommands){
+            cmd.setActive(true);
+        }
+        pausedCommands.clear();
     }
 }

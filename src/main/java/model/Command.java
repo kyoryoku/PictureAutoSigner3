@@ -38,12 +38,12 @@ public class Command implements KeyListener {
     public void handleHotkeyEvent(KeyCombination keyCombination) {
         if (this.isActive() && this.keyCombination.isDefined() && this.keyCombination.equals(keyCombination))
         {
-//            switch (this.type.get()){
-//                case PAST_TEXT -> Executor.execute(str1.get(), true);
-//                case CHANGE_COUNTER -> Executor.execute(str1.get(), false);
-//                case REPLACE -> Executor.replace(str1.get(), str2.get());
-//            }
-            System.out.println("выполнилось действие команды " + this.getName());
+            switch (this.type.get()){
+                case PAST_TEXT -> Executor.execute(str1.get(), true);
+                case CHANGE_COUNTER -> Executor.execute(str1.get(), false);
+                case REPLACE -> Executor.replace(str1.get(), str2.get());
+            }
+            //System.out.println("выполнилось действие команды " + this.getName());
         }
     }
 

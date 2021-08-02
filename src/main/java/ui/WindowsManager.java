@@ -68,7 +68,7 @@ public class WindowsManager {
                 CommandController cc = loader.getController();
                 commandViewStage = new Stage();
                 commandViewStage.setTitle("Настройка команды");
-                commandViewStage.setScene(new Scene(root, 600, 400));
+                commandViewStage.setScene(new Scene(root, 800, 500));
                 commandViewStage.setOnCloseRequest(e -> closeCommandWindow());
 
                 openedWindows.add("commandViewStage");

@@ -12,9 +12,9 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" styleClass="main-anchor-pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainController">
    <children>
       <JFXListView fx:id="lv" editable="true" layoutX="19.0" layoutY="86.0" onMouseClicked="#handleLv" prefHeight="280.0" prefWidth="562.0" styleClass="listView" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="40.0" />
-      <JFXToggleButton contentDisplay="RIGHT" layoutX="758.0" layoutY="508.0" prefHeight="30.0" prefWidth="260.0" text="Отключить все / Включить все" textFill="WHITE" AnchorPane.bottomAnchor="-10.0" AnchorPane.rightAnchor="-10.0" />
+      <JFXToggleButton fx:id="btnDisableAll" contentDisplay="RIGHT" layoutX="758.0" layoutY="508.0" onMouseClicked="#handleBtnDisableAll" prefHeight="30.0" prefWidth="260.0" text="Отключить все / Включить все" textFill="WHITE" AnchorPane.bottomAnchor="-15.0" AnchorPane.rightAnchor="-10.0" />
       <JFXRippler layoutX="57.0" layoutY="79.0" prefHeight="30.0" prefWidth="28.0" />
-      <Label layoutX="26.0" layoutY="560.0" text="C:\Users\dshul\Desktop\pas3\src\main\java\ui\MainController.java" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="5.0" />
+      <Label fx:id="profilePath" layoutX="26.0" layoutY="560.0" text="C:\Users\dshul\Desktop\pas3\src\main\java\ui\MainController.java" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" />
       <HBox layoutX="105.0" layoutY="200.0" prefHeight="30.0" prefWidth="800.0" spacing="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
             <JFXButton fx:id="btnAdd" onAction="#handleBtnAdd" prefHeight="30.0" prefWidth="100.0" text="Добавить">
@@ -30,7 +30,7 @@
                   <Insets left="-10.0" />
                </padding>
             </JFXButton>
-            <JFXButton fx:id="btnLoad" prefHeight="30.0" prefWidth="100.0" text="Загрузить">
+            <JFXButton fx:id="btnLoad" onAction="#handleBtnLoad" prefHeight="30.0" prefWidth="100.0" text="Загрузить">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -38,7 +38,7 @@
                   <Insets left="-10.0" />
                </padding>
             </JFXButton>
-            <JFXButton fx:id="btnSave" prefHeight="30.0" prefWidth="100.0" text="Сохранить">
+            <JFXButton fx:id="btnSave" onAction="#handleBtnSave" prefHeight="30.0" prefWidth="100.0" text="Сохранить">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -47,11 +47,6 @@
                </padding>
             </JFXButton>
             <JFXButton fx:id="btnHelp" onAction="#handleBtnHelp" prefHeight="30.0" prefWidth="100.0" text="Помощь">
-               <padding>
-                  <Insets left="-10.0" />
-               </padding>
-            </JFXButton>
-            <JFXButton fx:id="btnProfile" onAction="#handleBtnProfile" prefHeight="30.0" prefWidth="100.0" text="Профиль">
                <padding>
                   <Insets left="-10.0" />
                </padding>

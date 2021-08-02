@@ -9,13 +9,18 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import model.Command;
 import model.DataModel;
+import model.exceptions.LoadProfileException;
+import model.exceptions.SaveProfileException;
 import org.kordamp.ikonli.javafx.FontIcon;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,12 +32,38 @@ public class MainController {
     @FXML private JFXListView<Command> lv;
     @FXML private JFXButton btnAdd;
     @FXML private JFXButton btnRemove;
-    @FXML private JFXButton btnProfile;
     @FXML private JFXButton btnHelp;
     @FXML private JFXButton btnSave;
     @FXML private JFXButton btnLoad;
+    @FXML private Label profilePath;
+
+    @FXML private JFXToggleButton btnDisableAll;
 
 
+
+    @FXML void handleBtnDisableAll(MouseEvent event) {
+        if (event.getButton() == MouseButton.PRIMARY){
+            if (btnDisableAll.isSelected()){
+                DataModel.getDataModel().enableAll();
+            } else {
+                DataModel.getDataModel().disableAll();
+            }
+        }
+
+        if (event.getButton() == MouseButton.SECONDARY){
+            System.out.println("r");
+            if (btnDisableAll.isSelected()){
+                DataModel.getDataModel().pause();
+                btnDisableAll.setSelected(false);
+            } else {
+                DataModel.getDataModel().unpause();
+                btnDisableAll.setSelected(true);
+            }
+        }
+
+
+
+    }
 
 
     //обработчик нажатия на кнопку Добавить
@@ -51,14 +82,44 @@ public class MainController {
         }
     }
 
-    //обработчик нажатия на кнопку Профиль
-    @FXML void handleBtnProfile(ActionEvent event) {
-        WindowsManager.getInstance().openProfileWindow();
-    }
-
     //обработчик нажатия на кнопку Помощь
     @FXML void handleBtnHelp(ActionEvent event) {
         WindowsManager.getInstance().openHelpWindow();
+    }
+
+
+    @FXML private void handleBtnSave (ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Сохранить профиль в файл...");
+        File file = fileChooser.showSaveDialog(btnSave.getScene().getWindow());
+        if (file != null){
+            profilePath.setText(file.getAbsolutePath());
+            try {
+                //hint.setText("Профиль успешно сохранен в файл!");
+                DataModel.getDataModel().getProfile().saveProfile();
+
+            } catch (SaveProfileException e) {
+                System.out.println(e.getMessage());
+                //hint.setText("Ошибка при записи профиля!");
+            }
+
+        }
+    }
+
+    @FXML private void handleBtnLoad (ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Загрузить профиль из файла...");
+        File file = fileChooser.showOpenDialog(btnLoad.getScene().getWindow());
+        if (file != null){
+            profilePath.setText(file.getAbsolutePath());
+            try {
+                //hint.setText("Профиль успешно загружен из файла!");
+                DataModel.getDataModel().getProfile().loadProfile();
+            } catch (LoadProfileException e){
+                System.out.println(e.getMessage());
+                //hint.setText("Ошибка при чтении профиля!");
+            }
+        }
     }
 
     //обработчик кликов по ListView
@@ -69,7 +130,7 @@ public class MainController {
     }
 
     @FXML void initialize() {
-
+        profilePath.textProperty().bindBidirectional(DataModel.getDataModel().getProfile().profilePathProperty());
 
         initializeButtons();
         initializeListView();
@@ -92,12 +153,6 @@ public class MainController {
         removeIcon.setIconSize(iconSize);
         removeIcon.setIconColor(iconColorAlert);
         btnRemove.setGraphic(removeIcon);
-
-        //Кнопка Профиль
-        FontIcon profileIcon = new FontIcon("anto-file-ppt");
-        profileIcon.setIconSize(iconSize);
-        profileIcon.setIconColor(iconColor);
-        btnProfile.setGraphic(profileIcon);
 
         //Кнопка Помощь
         FontIcon helpIcon = new FontIcon("anto-question-circle");

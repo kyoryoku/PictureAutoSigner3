@@ -1,5 +1,6 @@
 package ui;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -7,15 +8,20 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import model.Command;
 import model.CommandType;
 import model.DataModel;
+import org.kordamp.ikonli.javafx.FontIcon;
 
+import javax.xml.crypto.Data;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -23,7 +29,6 @@ public class CommandController {
 
     @FXML private ResourceBundle resources;
     @FXML private URL location;
-
 
     //Элементы команды
     @FXML private JFXTextField cmdName;
@@ -38,15 +43,23 @@ public class CommandController {
     @FXML private AnchorPane searchAnchorPane;
     @FXML private JFXComboBox<String> searchComboBox;
 
+    //Кнопки
+    @FXML private JFXButton btnAccept;
+    @FXML private JFXButton btnCancel;
+
+
     //в ней хранится TextArea, которая вызвала окно поиска
     private JFXTextArea sourceTextArea;
 
     @FXML void initialize() {
-        initializeCmdName();
-        initializeCmdType();
-        initializeCmdStrs();
-        initializeLabelMessage();
+        lblMessage.setText("Выберите тип команды!");
+        cmdType.getItems().setAll(CommandType.values());
+        cmdType.valueProperty().addListener((observableValue, oldValue, newValue) -> changeContent(newValue));
 
+        cmdStr1.setOnKeyReleased(this::handleStr1Str2KeyRelease);
+        cmdStr2.setOnKeyReleased(this::handleStr1Str2KeyRelease);
+
+        initializeButtons();
         initializeSearchAnchorPane();
         initializeSearchComboBox();
     }
@@ -54,20 +67,37 @@ public class CommandController {
     //этот метод нужен для передачи фокуса на поле сразу после отображения окна
     //вызывается в WindowsManager
     public void afterShow(){
+        cmdName.setText(DataModel.getDataModel().getChosenCommand().getName());
+        cmdType.getSelectionModel().select(DataModel.getDataModel().getChosenCommand().getType());
+        changeContent(DataModel.getDataModel().getChosenCommand().getType());
+        cmdStr1.setText(DataModel.getDataModel().getChosenCommand().getStr1());
+        cmdStr2.setText(DataModel.getDataModel().getChosenCommand().getStr2());
+
         cmdName.requestFocus();
+        cmdName.positionCaret(cmdName.getText().length());
     }
 
-    //Инициализируем поля Str1 и Str2 у команды
-    private void initializeCmdStrs(){
-        cmdStr1.textProperty().bindBidirectional(
-                DataModel.getDataModel().getChosenCommand().str1Property()
-        );
-        cmdStr1.setOnKeyReleased(this::handleStr1Str2KeyRelease);
 
-        cmdStr2.textProperty().bindBidirectional(
-                DataModel.getDataModel().getChosenCommand().str2Property()
-        );
-        cmdStr2.setOnKeyReleased(this::handleStr1Str2KeyRelease);
+
+    //метод обновляет контент в зависимости от типа команды
+    private void changeContent(CommandType newType){
+        switch (newType){
+            case NOT_SET -> {
+                lblMessage.setVisible(true);
+                cmdStr1.setVisible(false);
+                cmdStr2.setVisible(false);
+            }
+            case PAST_TEXT, CHANGE_COUNTER -> {
+                lblMessage.setVisible(false);
+                cmdStr1.setVisible(true);
+                cmdStr2.setVisible(false);
+            }
+            case REPLACE -> {
+                lblMessage.setVisible(false);
+                cmdStr1.setVisible(true);
+                cmdStr2.setVisible(true);
+            }
+        }
     }
 
     //обработчик нажатия клавиш в полях cmdStr1 и cmdStr2
@@ -85,56 +115,10 @@ public class CommandController {
         }
     }
 
-    //Инициализируем ComboBox для типа команды
-    private void initializeCmdType(){
-        cmdType.getItems().setAll(CommandType.values());
-        cmdType.valueProperty().bindBidirectional(DataModel.getDataModel().getChosenCommand().typeProperty());
-        cmdType.valueProperty().addListener((observableValue, oldValue, newValue) -> changeContent(newValue));
-
-        changeContent(DataModel.getDataModel().getChosenCommand().getType());
-    }
-
-    //метод обновляет контент в зависимости от типа команды
-    private void changeContent(CommandType newType){
-        switch (newType){
-            case NOT_SET -> {
-                lblMessage.setVisible(true);
-                cmdStr1.setVisible(false);
-                cmdStr2.setVisible(false);
-            }
-            case PAST_TEXT, CHANGE_COUNTER -> {
-                lblMessage.setVisible(false);
-                cmdStr1.setVisible(true);
-                cmdStr2.setVisible(false);
-
-                AnchorPane.setBottomAnchor(cmdStr1, 10.);
-            }
-            case REPLACE -> {
-                AnchorPane.setBottomAnchor(cmdStr1, 150.);
-
-                lblMessage.setVisible(false);
-                cmdStr1.setVisible(true);
-                cmdStr2.setVisible(true);
-            }
-        }
-    }
-
     //инициализируем окошко поиска
     private void initializeSearchAnchorPane(){
         searchAnchorPane.setVisible(false);
         searchAnchorPane.setPrefHeight(90);
-    }
-
-    //инициализируем поле имени команды на форме
-    private void initializeCmdName(){
-        cmdName.textProperty().bindBidirectional(
-                DataModel.getDataModel().getChosenCommand().nameProperty()
-        );
-    }
-
-    //инициализируем метку-подсказку
-    private void initializeLabelMessage(){
-        lblMessage.setText("Выберите тип команды!");
     }
 
     //инициализируем ComboBox для поиска
@@ -178,7 +162,11 @@ public class CommandController {
             if (keyEvent.getCode() == KeyCode.ENTER){
                 //Если нажали ENTER, то добавляем текст из Editor в TextArea, вызвавшую окошко поиска
                 String text = searchComboBox.getEditor().getText();
-                sourceTextArea.setText(sourceTextArea.getText() + text);
+
+                String oldText = sourceTextArea.getText();
+                int caretPosition = sourceTextArea.getCaretPosition();
+                sourceTextArea.setText(oldText.substring(0, caretPosition) + text + oldText.substring(caretPosition));
+
 
                 //очищаем Editor, прячем выпадающий список, передаем фокус в TextArea
                 searchComboBox.getEditor().clear();
@@ -188,10 +176,11 @@ public class CommandController {
                 //Если пользователь выбрал пустые шаблоны ${} или #{},
                 // то переводим каретку на 1 символ назад, чтобы получился между скобок.
                 //Иначе ставим каретку в конец строки.
+                int newCaretPosition = caretPosition + text.length();
                 if (text.equals("${}") || text.equals("#{}")){
-                    sourceTextArea.positionCaret(sourceTextArea.getText().length() - 1);
+                    sourceTextArea.positionCaret(newCaretPosition - 1);
                 } else {
-                    sourceTextArea.positionCaret(sourceTextArea.getText().length());
+                    sourceTextArea.positionCaret(newCaretPosition);
                 }
             }
         });
@@ -203,5 +192,38 @@ public class CommandController {
 
         //Количество отображаемых вариантов в выпадающем списке
         searchComboBox.setVisibleRowCount(4);
+    }
+
+    private void initializeButtons(){
+        int iconSize = 20;
+        Color iconColor = Color.web("#0dba19");
+        Color iconColorAlert = Color.web("#ff1128");
+
+        //Кнопка Принять
+        FontIcon iconAccept = new FontIcon("anto-check");
+        iconAccept.setIconSize(iconSize);
+        iconAccept.setIconColor(iconColor);
+        btnAccept.setGraphic(iconAccept);
+
+        //Кнопка Отменить
+        FontIcon iconCancel = new FontIcon("anto-close");
+        iconCancel.setIconSize(iconSize);
+        iconCancel.setIconColor(iconColorAlert);
+        btnCancel.setGraphic(iconCancel);
+    }
+
+    @FXML void handleBtnAccept(ActionEvent event) {
+
+        DataModel.getDataModel().getChosenCommand().setName(cmdName.getText());
+        DataModel.getDataModel().getChosenCommand().setType(cmdType.getValue());
+        DataModel.getDataModel().getChosenCommand().setStr1(cmdStr1.getText());
+        DataModel.getDataModel().getChosenCommand().setStr2(cmdStr2.getText());
+
+        WindowsManager.getInstance().closeCommandWindow();
+
+    }
+
+    @FXML void handleBtnCancel(ActionEvent event) {
+        WindowsManager.getInstance().closeCommandWindow();
     }
 }
