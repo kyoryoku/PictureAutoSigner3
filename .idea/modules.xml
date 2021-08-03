@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/numerator/numerator.iml" filepath="$PROJECT_DIR$/numerator/numerator.iml" />
       <module fileurl="file://$PROJECT_DIR$/pas3.iml" filepath="$PROJECT_DIR$/pas3.iml" />
     </modules>
   </component>
